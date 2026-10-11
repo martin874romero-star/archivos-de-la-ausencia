@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archivos de la Ausencia | 50 años después</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Fuentes Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,300&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Estilos adicionales para ajustar la portada y la galería modal sin romper styles.css */
+    
+    /* Portada / Hero con imagen adaptable */
+    .hero-portada-wrapper {
+      width: 100%;
+      background-color: #0d0d0d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .hero-portada-wrapper img {
+      max-width: 90%;
+      max-height: 75vh;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-portada-wrapper img:hover {
+      transform: scale(1.01);
+    }
+
+    /* Galería de imágenes Grid */
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .galeria-item {
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      background-color: #1a1a1a;
+      aspect-ratio: 4/3;
+    }
+
+    .galeria-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .galeria-item img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+
+    /* Ventana Emergente Modal (<dialog>) */
+    dialog.modal-imagen {
+      border: none;
+      border-radius: 12px;
+      padding: 20px;
+      background: rgba(15, 15, 15, 0.95);
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+    }
+
+    dialog.modal-imagen::backdrop {
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-contenido {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-contenido img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .cerrar-modal {
+      background-color: #c0392b;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      margin-top: 15px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .cerrar-modal:hover {
+      background-color: #e74c3c;
+    }
+
+    .creditos-img {
+      max-width: 320px;
+      height: auto;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">Archivos de la Ausencia</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+      <nav class="nav-menu" id="navMenu">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#sobre-el-proyecto">El Proyecto</a></li>
+          <li><a href="#historia">1976 - 1983</a></li>
+          <li><a href="#linea-de-tiempo">Línea de Tiempo</a></li>
+          <li><a href="#voces-archivos">Voces y Archivos</a></li>
+          <li><a href="#galeria-fotos">Galería</a></li>
+          <li><a href="#arte">Arte</a></li>
+          <li><a href="#democracia">Democracia</a></li>
+          <li><a href="#quiz">Trivia</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / Portada -->
+  <section id="inicio" class="hero-section">
+    <div class="container hero-content">
+      <span class="tagline">50 AÑOS DESPUÉS, LA MEMORIA SIGUE HABLANDO</span>
+      <h1>ARCHIVOS DE LA AUSENCIA</h1>
+      <p>Un proyecto realizado por estudiantes de la FADyCC para conocer el pasado, comprender el presente y pensar el futuro.</p>
+      
+      <!-- Imagen de portada optimizada -->
+      <div class="hero-portada-wrapper">
+        <img src="img/portada.jpg" alt="Portada Archivos de la Ausencia" class="zoom-able">
+      </div>
+
+      <br>
+      <a href="#sobre-el-proyecto" class="btn btn-primary">Explorar el Archivo</a>
+    </div>
+  </section>
+
+  <!-- Índice interactivo rápido -->
+  <section class="index-section">
+    <div class="container">
+      <h2>Índice de Contenidos</h2>
+      <div class="index-grid">
+        <a href="#sobre-el-proyecto" class="index-card"><span>01</span> ¿Qué es Archivos de la Ausencia?</a>
+        <a href="#memoria-verdad-justicia" class="index-card"><span>02</span> Memoria, Verdad y Justicia</a>
+        <a href="#24-de-marzo" class="index-card"><span>03</span> ¿Qué pasó el 24 de Marzo de 1976?</a>
+        <a href="#terrorismo-estado" class="index-card"><span>04</span> ¿Qué fue el terrorismo de Estado?</a>
+        <a href="#linea-de-tiempo" class="index-card"><span>05</span> Línea de tiempo (1976 - 1983)</a>
+        <a href="#voces-archivos" class="index-card"><span>06</span> Voces que recuerdan & Archivos</a>
+        <a href="#galeria-fotos" class="index-card"><span>07</span> Galería Fotográfica</a>
+        <a href="#arte" class="index-card"><span>08</span> Arte y Memoria</a>
+        <a href="#reflexion-50-anos" class="index-card"><span>09</span> 50 años después</a>
+        <a href="#democracia" class="index-card"><span>10</span> ¿Qué es la democracia?</a>
+        <a href="#quiz" class="index-card"><span>11</span> ¿Cuánto conocés de nuestra historia?</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. ¿Qué es Archivos de la Ausencia? -->
+  <section id="sobre-el-proyecto" class="content-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>¿Qué es Archivos de la Ausencia?</h2>
+      </div>
+      <div class="content-block leading-text">
+        <p><strong>Archivos de la Ausencia</strong> es un proyecto realizado por estudiantes de la <strong>FADyCC</strong> que busca acercar a las nuevas generaciones a la historia de la Última Dictadura Cívico-Militar Argentina, a 50 años del golpe de Estado de 1976.</p>
+        <p>Desde nuestra mirada como estudiantes y jóvenes, nos proponemos conocer, investigar y reflexionar sobre la memoria, recuperando historias, voces y huellas de nuestro pasado.</p>
+        <p>A través de fotografías, testimonios, archivos audiovisuales y arte, buscamos generar un espacio que no solo informe, sino que también invite a hacer preguntas y a construir nuevas formas de acercarnos a nuestra historia.</p>
+        <blockquote class="quote">
+          "Porque recordar también es una forma de participar en el presente.<br>
+          <em>Archivos de la Ausencia</em> es nuestra manera de acercarnos a la memoria para conocer el pasado, comprender el presente y pensar el futuro."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Memoria, Verdad y Justicia -->
+  <section id="memoria-verdad-justicia" class="content-section bg-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Memoria, Verdad y Justicia</h2>
+      </div>
+      <div class="content-block">
+        <p>Desde el año 2006, cada <strong>24 de marzo</strong> se conmemora oficialmente en nuestro país el <strong>Día Nacional de la Memoria por la Verdad y la Justicia</strong> con el objetivo de:</p>
+        <ul class="styled-list">
+          <li><strong>Ejercitar la Memoria:</strong> en tanto acto de recordar, reflexionar y concientizar colectivamente sobre las graves consecuencias económicas, sociales, políticas, jurídicas y culturales de la última dictadura cívico-militar.</li>
+          <li><strong>Ratificar las demandas:</strong> y profundizar la búsqueda de Verdad y Justicia respecto de las violaciones sistemáticas de los derechos humanos por parte de las Fuerzas Armadas y de Seguridad.</li>
+          <li><strong>Comprometer a la ciudadanía:</strong> en la defensa de los valores democráticos.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 & 4. Contexto Histórico -->
+  <section id="historia" class="content-section">
+    <div class="container">
+      <div class="grid-2col">
+        <div id="24-de-marzo">
+          <div class="section-header">
+            <span class="section-number">03</span>
+            <h2>¿Qué pasó el 24 de Marzo de 1976?</h2>
+          </div>
+          <p>El 24 de marzo de 1976 las Fuerzas Armadas argentinas encabezaron un golpe de Estado contra el gobierno constitucional de María Estela Martínez de Perón, quien había asumido la primera magistratura el 1 de julio de 1974, luego del fallecimiento del presidente Juan Domingo Perón.</p>
+          <p>Faltaban apenas algunos meses para la realización de elecciones libres, que habían sido adelantadas para octubre de 1976. El gobierno fue asumido por una Junta Militar integrada por los jefes de las tres armas: Ejército, Armada y Aeronáutica, y las fuerzas de seguridad quedaron subordinadas a su conducción.</p>
+        </div>
+
+        <div id="terrorismo-estado">
+          <div class="section-header">
+            <span class="section-number">04</span>
+            <h2>¿Qué fue el terrorismo de Estado?</h2>
+          </div>
+          <p>Entre 1976-1983 miles de personas fueron secuestradas en centros de detención ilegal, asesinadas, desaparecidas, torturadas, encarceladas, o debieron sufrir el exilio, mientras que cientos de bebés fueron sustraídos a sus familias biológicas y entregados a otras, por lo general de represores, luego de sustituirse su identidad. Todos estos delitos fueron planificados y ejecutados de manera masiva y sistemática por las Fuerzas Armadas, quienes contaron con el apoyo de responsables civiles.</p>
+          <p>El terrorismo de Estado se caracterizó por la implementación de un dispositivo represivo clandestino, basado fundamentalmente en la existencia de campos de concentración y en el exterminio de personas detenidas bajo la modalidad de la desaparición forzada. Hasta el momento, se han logrado identificar 800 lugares que funcionaron como centros clandestinos de detención y exterminio en todo el país.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Línea de tiempo -->
+  <section id="linea-de-tiempo" class="content-section bg-dark text-light">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2>Línea de Tiempo (1976 – 1983)</h2>
+      </div>
+      <p class="section-intro">Siete años que transformaron nuestra historia. Conocer lo que ocurrió nos permite comprender el pasado, reflexionar sobre el presente y pensar qué sociedad queremos construir hacia el futuro.</p>
+      
+      <div class="timeline">
+        <div class="timeline-item" data-year="1976">
+          <div class="year">1976</div>
+          <div class="details">Golpe de Estado e inicio de la dictadura cívico-militar.</div>
+        </div>
+        <div class="timeline-item" data-year="1977">
+          <div class="year">1977</div>
+          <div class="details">Primeras rondas de las Madres de Plaza de Mayo exigiendo la aparición con vida de sus hijos.</div>
+        </div>
+        <div class="timeline-item" data-year="1978">
+          <div class="year">1978</div>
+          <div class="details">Mundial de Fútbol en Argentina utilizado como propaganda mientras continuaba la represión clandestina.</div>
+        </div>
+        <div class="timeline-item" data-year="1979">
+          <div class="year">1979</div>
+          <div class="details">Visita de la Comisión Interamericana de Derechos Humanos (CIDH) y recepción de miles de denuncias.</div>
+        </div>
+        <div class="timeline-item" data-year="1980">
+          <div class="year">1980</div>
+          <div class="details">Premio Nobel de la Paz otorgado a Adolfo Pérez Esquivel por su defensa de los DDHH.</div>
+        </div>
+        <div class="timeline-item" data-year="1981">
+          <div class="year">1981</div>
+          <div class="details">Creciente crisis económica y social; primeras movilizaciones sindicales masivas.</div>
+        </div>
+        <div class="timeline-item" data-year="1982">
+          <div class="year">1982</div>
+          <div class="details">Guerra de Malvinas y paulatino colapso del régimen militar.</div>
+        </div>
+        <div class="timeline-item" data-year="1983">
+          <div class="year">1983</div>
+          <div class="details">Elecciones democráticas y retorno al estado de derecho en la Argentina.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Voces y Archivos -->
+  <section id="voces-archivos" class="content-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2>Voces que recuerdan & Archivos</h2>
+      </div>
+      <p>Testimonios de los familiares y acervo documental que sostiene nuestra memoria colectiva.</p>
+      
+      <div class="archives-grid">
+        <div class="archive-card">
+          <div class="archive-icon">📁</div>
+          <h3>Madres y Abuelas de Plaza de Mayo</h3>
+          <p>Símbolo inalcanzable de lucha, búsqueda incesante de la verdad y recuperación de la identidad de cientos de nietos.</p>
+        </div>
+        <div class="archive-card">
+          <div class="archive-icon">📢</div>
+          <h3>Marchas y movilizaciones</h3>
+          <p>Registros históricos del pueblo en las calles exigiendo Justicia y el fin de la impunidad.</p>
+        </div>
+        <div class="archive-card">
+          <div class="archive-icon">🪧</div>
+          <h3>Afiches y pancartas</h3>
+          <p>La gráfica popular y de resistencia como manifestación visual de reclamo y memoria activa.</p>
+        </div>
+        <div class="archive-card">
+          <div class="archive-icon">🏛️</div>
+          <h3>Espacios de memoria</h3>
+          <p>Sitios donde funcionaron centros clandestinos, señalizados y transformados en lugares de pedagogía y recuerdo.</p>
+        </div>
+        <div class="archive-card">
+          <div class="archive-icon">🖼️</div>
+          <h3>Fotografías de personas desaparecidas</h3>
+          <p>Los rostros de la memoria que continúan presentes exigiendo respuesta, verdad y justicia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA FOTOGRÁFICA INTERACTIVA -->
+  <section id="galeria-fotos" class="content-section bg-alt">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">07</span>
+        <h2>Galería de Archivos y Fotografías</h2>
+      </div>
+      <p>Hacé clic en cualquier imagen para verla en pantalla completa.</p>
+
+      <div class="galeria-grid">
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.14.jpeg" alt="Archivo 1" class="zoom-able">
+        </div>
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.14 (1).jpeg" alt="Archivo 2" class="zoom-able">
+        </div>
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.14 (2).jpeg" alt="Archivo 3" class="zoom-able">
+        </div>
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.15.jpeg" alt="Archivo 4" class="zoom-able">
+        </div>
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.15 (1).jpeg" alt="Archivo 5" class="zoom-able">
+        </div>
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.16.jpeg" alt="Archivo 6" class="zoom-able">
+        </div>
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.16 (1).jpeg" alt="Archivo 7" class="zoom-able">
+        </div>
+        <div class="galeria-item">
+          <img src="img/WhatsApp Image 2026-10-09 at 17.04.17.jpeg" alt="Archivo 8" class="zoom-able">
+        </div>
+        <!-- Puedes seguir agregando más imágenes duplicando el bloque <div class="galeria-item">...</div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Arte y memoria -->
+  <section id="arte" class="content-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">08</span>
+        <h2>¿Cómo puede el arte mantener viva la memoria?</h2>
+      </div>
+      <div class="content-block">
+        <p>El arte puede convertirse en una forma de recordar, transmitir y generar preguntas sobre el pasado. A través de una imagen, una película, una canción, una obra o una fotografía, los hechos históricos pueden llegar a nuevas generaciones desde una experiencia diferente.</p>
+        
+        <div class="art-card-featured">
+          <h3>Obra – Contexto – Significado</h3>
+          <p>El arte no cambia lo que ocurrió, pero puede cambiar la manera en que lo recordamos, lo comprendemos y lo transmitimos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. 50 años después -->
+  <section id="reflexion-50-anos" class="content-section bg-alt">
+    <div class="container text-center">
+      <div class="section-header center">
+        <span class="section-number">09</span>
+        <h2>50 años después: ¿qué hacemos con la memoria?</h2>
+      </div>
+      <div class="content-block max-width-800">
+        <p>Cincuenta años después del golpe de Estado, las nuevas generaciones tenemos la posibilidad y la responsabilidad de seguir construyendo memoria. Escuchar testimonios, conocer nuestra historia, preservar archivos, crear desde el arte y hacer nuevas preguntas también son formas de recordar.</p>
+        <p>La memoria nos permite mirar hacia atrás para comprender el presente y pensar el futuro. Y la democracia nos invita a participar, expresarnos, escuchar otras voces y defender los derechos que forman parte de nuestra vida cotidiana.</p>
+        <p class="highlight-text">Porque la memoria no termina en un archivo. Continúa en cada persona que decide conocer, preguntar y recordar.</p>
+        <h3 class="question-callout">¿Qué hacemos nosotros con la memoria?</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Democracia interactiva -->
+  <section id="democracia" class="content-section bg-dark text-light">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">10</span>
+        <h2>¿Qué es la democracia para nosotros?</h2>
+      </div>
+      <p>Pensar la democracia es, también, construir memoria, educar en el respeto y la valoración de las diversidades, reclamar y conquistar derechos, luchar por la equidad y comprender la democracia como una experiencia que se despliega en la escuela, en la familia, en el mundo laboral y en todos los ámbitos de nuestra vida cotidiana en sociedad.</p>
+      
+      <div class="word-cloud-container">
+        <h3>¿Y para vos, qué significa vivir en democracia?</h3>
+        <p>Elegí las palabras que para vos representan la democracia:</p>
+        
+        <div class="word-tags" id="wordTags">
+          <button class="tag-btn" data-word="LIBERTAD">LIBERTAD</button>
+          <button class="tag-btn" data-word="PARTICIPACIÓN">PARTICIPACIÓN</button>
+          <button class="tag-btn" data-word="DERECHOS">DERECHOS</button>
+          <button class="tag-btn" data-word="MEMORIA">MEMORIA</button>
+          <button class="tag-btn" data-word="RESPETO">RESPETO</button>
+          <button class="tag-btn" data-word="IGUALDAD">IGUALDAD</button>
+          <button class="tag-btn" data-word="VOZ">VOZ</button>
+        </div>
+        <div id="wordSelectionFeedback" class="selection-feedback"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Trivia / Quiz -->
+  <section id="quiz" class="content-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-number">11</span>
+        <h2>¿Cuánto conocés de nuestra historia?</h2>
+      </div>
+      
+      <div class="quiz-container" id="quizContainer">
+        <!-- Pregunta 1 -->
+        <div class="quiz-card" data-question="1">
+          <p class="quiz-question">1. ¿En qué año comenzó la Dictadura Cívico-Militar Argentina?</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" data-correct="false">1970</button>
+            <button class="quiz-btn" data-correct="false">1973</button>
+            <button class="quiz-btn" data-correct="true">1976</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="quiz-card" data-question="2">
+          <p class="quiz-question">2. ¿Hasta qué año se extendió la Última Dictadura?</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" data-correct="false">1980</button>
+            <button class="quiz-btn" data-correct="true">1983</button>
+            <button class="quiz-btn" data-correct="false">1985</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="quiz-card" data-question="3">
+          <p class="quiz-question">3. ¿Por qué es importante conservar testimonios, fotografías y documentos?</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" data-correct="false">Porque son objetos antiguos</button>
+            <button class="quiz-btn" data-correct="false">Porque sirven solamente para estudiar</button>
+            <button class="quiz-btn" data-correct="true">Porque permiten conservar y transmitir la memoria</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="quiz-card" data-question="4">
+          <p class="quiz-question">4. ¿Qué lugar ocupa el arte en la construcción de la memoria?</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" data-correct="false">No tiene relación con la memoria</button>
+            <button class="quiz-btn" data-correct="true">Puede ayudar a recordar, expresar, cuestionar y transmitir experiencias</button>
+            <button class="quiz-btn" data-correct="false">Reemplaza los documentos históricos</button>
+          </div>
+        </div>
+      </div>
+      <div id="quizResult" class="quiz-result"></div>
+    </div>
+  </section>
+
+  <!-- 12. Reflexión final & Cierre -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <h2>MEMORIA, DEMOCRACIA Y NUEVAS GENERACIONES</h2>
+        <p>Llegamos al final de este recorrido, pero la memoria no termina acá.</p>
+        <p>Como estudiantes y como parte de las nuevas generaciones, creemos que conocer nuestra historia también es una forma de construir nuestro presente. Las fotografías, los testimonios, los documentos y las expresiones artísticas nos permiten acercarnos a un pasado que dejó huellas profundas en nuestra sociedad.</p>
+        <p>Recordar es escuchar las voces que permanecen, reconocer las ausencias y preguntarnos qué hacemos hoy con aquello que heredamos.</p>
+        <p>La democracia también forma parte de esta memoria. No es solamente una fecha o una elección: se construye todos los días cuando podemos expresarnos, participar, debatir, escuchar otras voces y defender nuestros derechos.</p>
+        <blockquote class="footer-quote">
+          Por eso, mantener viva la memoria es una tarea colectiva. No pertenece solamente a quienes vivieron aquellos años. También nos pertenece a quienes nacimos después y tenemos la posibilidad de conocer, preguntar, crear y transmitir.
+        </blockquote>
+
+        <!-- Créditos del Proyecto con imagen -->
+        <div style="text-align: center; margin-top: 30px;">
+          <img src="img/Creditos.jpg" alt="Créditos del Proyecto" class="creditos-img zoom-able">
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; Archivos de la Ausencia — Proyecto estudiantil FADyCC</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- VENTANA MODAL EMERGENTE DE ZOOM -->
+  <dialog id="modalZoom" class="modal-imagen">
+    <div class="modal-contenido">
+      <img id="imagenAmpliada" src="" alt="Imagen ampliada">
+      <button class="cerrar-modal" id="btnCerrar">Cerrar</button>
+    </div>
+  </dialog>
+
+  <!-- SCRIPTS -->
+  <script src="js/main.js"></script>
+
+  <!-- Script para la Galería Modal -->
+  <script>
+    const modal = document.getElementById('modalZoom');
+    const imagenAmpliada = document.getElementById('imagenAmpliada');
+    const btnCerrar = document.getElementById('btnCerrar');
+    
+    // Seleccionamos todas las imágenes con la clase zoom-able
+    const imagenes = document.querySelectorAll('.zoom-able');
+
+    imagenes.forEach(img => {
+      img.addEventListener('click', () => {
+        imagenAmpliada.src = img.src;
+        modal.showModal();
+      });
+    });
+
+    btnCerrar.addEventListener('click', () => {
+      modal.close();
+    });
+
+    // Cerrar al hacer clic fuera de la foto
+    modal.addEventListener('click', (e) => {
+      const rect = modal.getBoundingClientRect();
+      if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+        modal.close();
+      }
+    });
+  </script>
+
+</body>
+</html>
