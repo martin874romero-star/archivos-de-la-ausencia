@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARCHIVOS DE LA AUSENCIA — Revista Digital</title>
+  <title>ARCHIVOS DE LA AUSENCIA — Revista Digital Interactiva</title>
   
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,6 +81,7 @@
       justify-content: center;
       padding: 20px;
       position: relative;
+      perspective: 1200px;
     }
 
     .flipbook-container {
@@ -88,14 +89,20 @@
       height: 600px;
       margin: 0 auto;
       box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.8s ease;
+    }
+
+    .flipbook-container.book-closed-end {
+      transform: scale(0.9) rotateY(-8deg);
+      box-shadow: -20px 40px 90px rgba(0,0,0,0.95), 0 0 25px rgba(212, 175, 55, 0.12);
     }
 
     /* Estilos de las Hojas */
     .my-page {
       background-color: #f5f2ea;
       color: var(--paper-text);
-      padding: 40px 45px;
-      overflow: hidden;
+      padding: 35px 40px;
+      overflow-y: auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -116,7 +123,7 @@
       border-left: 1px solid rgba(0,0,0,0.1);
     }
 
-    /* Portada y Contratapa */
+    /* Portada y Contratapa Exterior */
     .my-page.--cover {
       background-image: url('img/portada.jpg');
       background-size: cover;
@@ -128,16 +135,17 @@
     }
 
     .my-page.--back-cover {
-      background: linear-gradient(135deg, #0d0d10 0%, #17171d 100%);
+      background: linear-gradient(135deg, #0a0a0d 0%, #16161c 100%);
       color: #fff;
       padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-left: 2px solid rgba(212, 175, 55, 0.3);
+      border-left: 3px solid rgba(212, 175, 55, 0.4);
+      box-shadow: inset 15px 0 30px rgba(0,0,0,0.8);
     }
 
-    .cover-box, .back-cover-box {
+    .cover-box {
       background: rgba(10, 10, 14, 0.85);
       border: 1px solid rgba(212, 175, 55, 0.4);
       backdrop-filter: blur(5px);
@@ -146,6 +154,25 @@
       text-align: center;
       margin: 20px;
       max-width: 380px;
+    }
+
+    .back-cover-box {
+      background: rgba(8, 8, 12, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 35px 40px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 20px;
+      max-width: 390px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+    }
+
+    .flipbook-container.book-closed-end .back-cover-box {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .cover-title {
@@ -164,16 +191,23 @@
       margin-bottom: 15px;
     }
 
-    .btn-start-reading {
+    .btn-start-reading, .btn-reopen {
       background: var(--gold);
       color: #000;
       font-weight: bold;
       border: none;
-      padding: 10px 20px;
+      padding: 11px 24px;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 0.8rem;
-      letter-spacing: 1px;
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      transition: all 0.25s;
+    }
+
+    .btn-reopen:hover, .btn-start-reading:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
     }
 
     /* Maquetación del Contenido Interior */
@@ -189,9 +223,9 @@
 
     h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1.55rem;
+      font-size: 1.45rem;
       color: #111;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       line-height: 1.2;
     }
 
@@ -200,28 +234,28 @@
       height: 2px;
       background: var(--accent);
       width: 50px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
 
     .content-body {
       font-family: 'Merriweather', serif;
-      font-size: 0.9rem;
-      line-height: 1.65;
+      font-size: 0.88rem;
+      line-height: 1.6;
       color: #222;
     }
 
     .content-body p {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       text-align: justify;
     }
 
     .bullet-list {
       list-style: none;
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
     .bullet-list li {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       padding-left: 18px;
       position: relative;
     }
@@ -240,35 +274,122 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin: 15px 0;
+      margin: 12px 0;
       justify-content: center;
     }
 
     .timeline-year {
       background: var(--accent);
       color: #fff;
-      padding: 5px 10px;
+      padding: 4px 10px;
       font-family: 'Cinzel', serif;
       font-weight: bold;
       border-radius: 3px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
+    /* Componentes Interactivos Nuevos */
+    .interactive-map {
+      background: #e8e2d5;
+      border: 1px solid #c8c0b0;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 8px;
+    }
+    .map-nodes {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .map-node-btn {
+      background: #fff;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: left;
+    }
+    .map-node-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .map-info-box {
+      margin-top: 6px;
+      background: rgba(255,255,255,0.9);
+      border-left: 3px solid var(--accent);
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      display: none;
+    }
+
+    .audio-player-card {
+      background: #1e1e24;
+      color: #fff;
+      border-radius: 6px;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .audio-play-btn {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .archive-item {
+      background: rgba(0,0,0,0.05);
+      border: 1px dashed #aaa;
+      padding: 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .archive-item:hover {
+      background: rgba(139, 0, 0, 0.1);
+      border-color: var(--accent);
+    }
+
+    /* Sección 10: Muro / Palabras Interactivos */
     .words-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 15px;
+      gap: 6px;
+      margin-top: 8px;
     }
 
     .word-chip {
       background: rgba(0,0,0,0.06);
       border: 1px solid rgba(0,0,0,0.2);
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 15px;
       font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       cursor: pointer;
+      user-select: none;
       transition: all 0.2s;
     }
 
@@ -278,15 +399,58 @@
       border-color: var(--accent);
     }
 
+    .wall-input-container {
+      margin-top: 10px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .wall-input {
+      flex: 1;
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    .wall-add-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .memory-wall {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      max-height: 80px;
+      overflow-y: auto;
+    }
+
+    .memory-note {
+      background: #fef08a;
+      color: #713f12;
+      padding: 3px 7px;
+      border-radius: 3px;
+      font-size: 0.72rem;
+      box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+    }
+
     /* Quiz */
     .quiz-item {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .quiz-question {
       font-weight: bold;
-      margin-bottom: 4px;
-      font-size: 0.85rem;
+      margin-bottom: 3px;
+      font-size: 0.82rem;
     }
 
     .quiz-options button {
@@ -295,11 +459,11 @@
       text-align: left;
       background: rgba(255,255,255,0.7);
       border: 1px solid #ccc;
-      padding: 5px 8px;
+      padding: 4px 8px;
       margin-bottom: 3px;
       border-radius: 3px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
     }
 
     .quiz-options button.correct { background: #d4edda; border-color: #28a745; color: #155724; }
@@ -335,7 +499,7 @@
     .flip-btn.prev { left: 15px; }
     .flip-btn.next { right: 15px; }
 
-    /* Footer tipo Heyzine */
+    /* Footer */
     .magazine-footer {
       background: rgba(15, 15, 18, 0.9);
       backdrop-filter: blur(10px);
@@ -344,6 +508,37 @@
       text-align: center;
       font-size: 0.85rem;
       color: #aaa;
+    }
+
+    /* Modal Emergente */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(5px);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: #18181c;
+      color: #fff;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 25px;
+      max-width: 500px;
+      width: 100%;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 12px; right: 15px;
+      background: none; border: none;
+      color: #aaa; font-size: 1.4rem; cursor: pointer;
     }
 
     /* Índice Lateral */
@@ -387,6 +582,7 @@
   <header class="magazine-nav">
     <div class="nav-brand">ARCHIVOS DE LA AUSENCIA</div>
     <div class="nav-controls">
+      <button id="btn-sound" title="Sonido de páginas">🔊 Sonido: ON</button>
       <button id="btn-toc">📖 Índice</button>
       <button id="btn-fullscreen">⛶ Pantalla Completa</button>
     </div>
@@ -408,7 +604,7 @@
 
     <div class="flipbook-container" id="flipbook">
 
-      <!-- PORTADA (HOJA 1) -->
+      <!-- HOJA 1: PORTADA EXTERIOR -->
       <div class="my-page --cover" data-density="hard">
         <div class="cover-box">
           <h1 class="cover-title">ARCHIVOS DE LA AUSENCIA</h1>
@@ -417,7 +613,7 @@
         </div>
       </div>
 
-      <!-- PÁGINA 2: ÍNDICE -->
+      <!-- HOJA 2: ÍNDICE -->
       <div class="my-page --left">
         <div>
           <span class="section-tag">SUMARIO</span>
@@ -425,24 +621,24 @@
           <div class="divider"></div>
           <div class="content-body">
             <ol style="margin-left: 18px; line-height: 1.8;">
-              <li>¿Qué es Archivos de la Ausencia?</li>
-              <li>Memoria, Verdad y Justicia</li>
-              <li>¿Qué pasó el 24 de Marzo de 1976?</li>
-              <li>¿Qué fue el terrorismo de Estado?</li>
-              <li>Línea de tiempo</li>
-              <li>Voces que recuerdan</li>
-              <li>Archivos</li>
-              <li>¿Cómo puede el arte mantener viva la memoria?</li>
-              <li>50 años después: ¿qué hacemos con la memoria?</li>
-              <li>¿Qué es la democracia para nosotros?</li>
-              <li>¿Cuánto conoces de nuestra historia?</li>
-              <li>Reflexión final: memoria, democracia y nuevas generaciones</li>
+              <li><a href="#" onclick="turnToPage(2); return false;">¿Qué es Archivos de la Ausencia?</a></li>
+              <li><a href="#" onclick="turnToPage(3); return false;">Memoria, Verdad y Justicia</a></li>
+              <li><a href="#" onclick="turnToPage(4); return false;">¿Qué pasó el 24 de Marzo de 1976?</a></li>
+              <li><a href="#" onclick="turnToPage(5); return false;">¿Qué fue el terrorismo de Estado?</a></li>
+              <li><a href="#" onclick="turnToPage(6); return false;">Línea de tiempo</a></li>
+              <li><a href="#" onclick="turnToPage(7); return false;">Voces que recuerdan</a></li>
+              <li><a href="#" onclick="turnToPage(8); return false;">Archivos</a></li>
+              <li><a href="#" onclick="turnToPage(9); return false;">¿Cómo puede el arte mantener viva la memoria?</a></li>
+              <li><a href="#" onclick="turnToPage(10); return false;">50 años después: ¿qué hacemos con la memoria?</a></li>
+              <li><a href="#" onclick="turnToPage(11); return false;">¿Qué es la democracia para nosotros?</a></li>
+              <li><a href="#" onclick="turnToPage(12); return false;">¿Cuánto conoces de nuestra historia?</a></li>
+              <li><a href="#" onclick="turnToPage(13); return false;">Reflexión final: memoria, democracia y nuevas generaciones</a></li>
             </ol>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 3: SECCIÓN 1 -->
+      <!-- HOJA 3: SECCIÓN 1 -->
       <div class="my-page --right">
         <div>
           <span class="section-tag">SECCIÓN 01</span>
@@ -457,7 +653,7 @@
         </div>
       </div>
 
-      <!-- PÁGINA 4: SECCIÓN 2 -->
+      <!-- HOJA 4: SECCIÓN 2 -->
       <div class="my-page --left">
         <div>
           <span class="section-tag">SECCIÓN 02</span>
@@ -474,7 +670,7 @@
         </div>
       </div>
 
-      <!-- PÁGINA 5: SECCIÓN 3 -->
+      <!-- HOJA 5: SECCIÓN 3 -->
       <div class="my-page --right">
         <div>
           <span class="section-tag">SECCIÓN 03</span>
@@ -488,21 +684,29 @@
         </div>
       </div>
 
-      <!-- PÁGINA 6: SECCIÓN 4 -->
+      <!-- HOJA 6: SECCIÓN 4 (MAPA INTERACTIVO) -->
       <div class="my-page --left">
         <div>
           <span class="section-tag">SECCIÓN 04</span>
           <h2>¿Qué fue el terrorismo de Estado?</h2>
           <div class="divider"></div>
           <div class="content-body">
-            <p>Entre 1976-1983 miles de personas fueron secuestradas en centros de detención ilegal, asesinadas, desaparecidas, torturadas, encarceladas, o debieron sufrir el exilio, mientras que cientos de bebés fueron sustraídos a sus familias biológicas y entregados a otras, por lo general de represores, luego de sustituirse su identidad.</p>
-            <p>Todos estos delitos fueron planificados y ejecutados de manera masiva y sistemática por las Fuerzas Armadas, quienes contaron con el apoyo de responsables civiles.</p>
-            <p>El terrorismo de Estado se caracterizó por la implementación de un dispositivo represivo clandestino, basado fundamentalmente en la existencia de campos de concentración y en el exterminio de personas detenidas bajo la modalidad de la desaparición forzada. Se han identificado 800 centros clandestinos en todo el país.</p>
+            <p>Entre 1976-1983 miles de personas fueron secuestradas en centros de detención ilegal, asesinadas, desaparecidas o torturadas de manera sistemática.</p>
+
+            <div class="interactive-map">
+              <span style="font-size:0.72rem; font-weight:bold; color:var(--accent);">MAPA INTERACTIVO DE SITIOS DE MEMORIA</span>
+              <div class="map-nodes" style="margin-top:5px;">
+                <button class="map-node-btn" onclick="showMapNode('ESMA', 'Ex ESMA (Buenos Aires): Uno de los centros clandestinos de detención, tortura y exterminio más emblemáticos del país.')">📍 Ex ESMA (CABA)</button>
+                <button class="map-node-btn" onclick="showMapNode('RI9', 'Regimiento de Infantería 9 (Corrientes): Funcionó como Centro Clandestino de Detención en la región del Nordeste.')">📍 Regimiento de Infantería 9 (Corrientes)</button>
+                <button class="map-node-btn" onclick="showMapNode('La Perla', 'La Perla (Córdoba): Principal centro de detención clandestino del interior del país.')">📍 La Perla (Córdoba)</button>
+              </div>
+              <div id="map-info" class="map-info-box"></div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 7: SECCIÓN 5 -->
+      <!-- HOJA 7: SECCIÓN 5 -->
       <div class="my-page --right">
         <div>
           <span class="section-tag">SECCIÓN 05</span>
@@ -520,12 +724,12 @@
               <span class="timeline-year">1982</span>
               <span class="timeline-year">1983</span>
             </div>
-            <p style="margin-top:20px; font-style:italic; text-align:center;">Conocer lo que ocurrió nos permite comprender el pasado, reflexionar sobre el presente y pensar qué sociedad queremos construir hacia el futuro.</p>
+            <p style="margin-top:15px; font-style:italic; text-align:center;">Conocer lo que ocurrió nos permite comprender el pasado, reflexionar sobre el presente y pensar qué sociedad queremos construir hacia el futuro.</p>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 8: SECCIÓN 6 -->
+      <!-- HOJA 8: SECCIÓN 6 (AUDIO PLAYER) -->
       <div class="my-page --left">
         <div>
           <span class="section-tag">SECCIÓN 06</span>
@@ -533,30 +737,38 @@
           <div class="divider"></div>
           <div class="content-body">
             <p><em>Testimonios de los familiares y relatos en primera persona.</em></p>
-            <p style="margin-top:20px; font-style:italic;">"Las palabras de quienes vivieron la ausencia y mantuvieron viva la búsqueda son el pilar fundamental de nuestra memoria colectiva."</p>
+            <p style="margin-top:10px; font-style:italic;">"Las palabras de quienes vivieron la ausencia y mantuvieron viva la búsqueda son el pilar fundamental de nuestra memoria colectiva."</p>
+
+            <div class="audio-player-card">
+              <button class="audio-play-btn" id="audio-toggle-btn" onclick="toggleAudioRecord()">▶</button>
+              <div>
+                <div style="font-size:0.8rem; font-weight:bold; color:var(--gold);">ARCHIVO SONORO #01</div>
+                <div style="font-size:0.72rem; color:#aaa;" id="audio-status-text">Toca para reproducir testimonio en audio</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 9: SECCIÓN 7 -->
+      <!-- HOJA 9: SECCIÓN 7 (GALERÍA MODAL) -->
       <div class="my-page --right">
         <div>
           <span class="section-tag">SECCIÓN 07</span>
           <h2>Archivos</h2>
           <div class="divider"></div>
           <div class="content-body">
-            <ul class="bullet-list" style="line-height:2;">
-              <li>Madres y Abuelas de Plaza de Mayo.</li>
-              <li>Marchas y movilizaciones.</li>
-              <li>Afiches y pancartas.</li>
-              <li>Espacios de memoria.</li>
-              <li>Fotografías de personas desaparecidas.</li>
-            </ul>
+            <p style="font-size:0.8rem;">Haz clic en cada archivo para inspeccionar su ficha documental:</p>
+            <div class="archive-grid">
+              <div class="archive-item" onclick="openArchiveModal('Madres y Abuelas de Plaza de Mayo', 'Organizaciones de derechos humanos conformadas durante la dictadura para exigir la aparición con vida de sus hijos e hijas.')">📜 Madres y Abuelas</div>
+              <div class="archive-item" onclick="openArchiveModal('Marchas y Movilizaciones', 'Registros fotográficos de las históricas marchas de resistencia civil y reclamo de Justicia.')">📷 Marchas Históricas</div>
+              <div class="archive-item" onclick="openArchiveModal('Afiches y Pancartas', 'Expresiones gráficas, impresos y leyendas en la vía pública por la verdad.')">🖼️ Afiches y Pancartas</div>
+              <div class="archive-item" onclick="openArchiveModal('Espacios de Memoria', 'Centros ex clandestinos reconvertidos en espacios de pedagogía, arte y memoria activa.')">🏛️ Espacios de Memoria</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 10: SECCIÓN 8 -->
+      <!-- HOJA 10: SECCIÓN 8 -->
       <div class="my-page --left">
         <div>
           <span class="section-tag">SECCIÓN 08</span>
@@ -570,51 +782,57 @@
         </div>
       </div>
 
-      <!-- PÁGINA 11: SECCIÓN 9 -->
+      <!-- HOJA 11: SECCIÓN 9 -->
       <div class="my-page --right">
         <div>
           <span class="section-tag">SECCIÓN 09</span>
           <h2>50 años después: ¿qué hacemos con la memoria?</h2>
           <div class="divider"></div>
           <div class="content-body">
-            <p>Cincuenta años después del golpe de Estado, las nuevas generaciones tenemos la posibilidad y la responsabilidad de seguir construyendo memoria. Escuchar testimonios, conocer nuestra historia, preservar archivos, crear desde el arte y hacer nuevas preguntas también son formas de recordar.</p>
+            <p>Cincuenta años después del golpe de Estado, las nuevas generaciones tenemos la posibilidad y la responsabilidad de seguir construyendo memoria.</p>
             <p>La memoria nos permite mirar hacia atrás para comprender el presente y pensar el futuro. Y la democracia nos invita a participar, expresarnos, escuchar otras voces y defender los derechos que forman parte de nuestra vida cotidiana.</p>
             <p><strong>Porque la memoria no termina en un archivo. Continúa en cada persona que decide conocer, preguntar y recordar.</strong></p>
-            <p style="margin-top:15px; font-style:italic; color:var(--accent);">¿Qué hacemos nosotros con la memoria?</p>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 12: SECCIÓN 10 -->
-      <div class="my-page --left">
+      <!-- HOJA 12: SECCIÓN 10 (MURO COLABORATIVO - BLOQUEO DE FLIP 3D) -->
+      <div class="my-page --left" onpointerdown="event.stopPropagation()" onmousedown="event.stopPropagation()">
         <div>
           <span class="section-tag">SECCIÓN 10</span>
           <h2>¿Qué es la democracia para nosotros?</h2>
           <div class="divider"></div>
           <div class="content-body">
-            <p>Pensar la democracia es, también, construir memoria, educar en el respeto y la valoración de las diversidades, reclamar y conquistar derechos, luchar por la equidad y comprender la democracia como una experiencia que se despliega en la escuela, en la familia, en el mundo laboral y en todos los ámbitos de nuestra vida cotidiana en sociedad.</p>
-            <p style="margin-top:10px; font-weight:bold;">¿Y para vos, qué significa vivir en democracia?</p>
-            <p style="font-size:0.8rem; color:#666;">Elegí las palabras que para vos representan la democracia:</p>
+            <p style="font-size:0.8rem;">Elegí o sumá tus palabras para el Muro de la Memoria:</p>
             <div class="words-grid">
-              <span class="word-chip" onclick="this.classList.toggle('selected')">LIBERTAD</span>
-              <span class="word-chip" onclick="this.classList.toggle('selected')">PARTICIPACIÓN</span>
-              <span class="word-chip" onclick="this.classList.toggle('selected')">DERECHOS</span>
-              <span class="word-chip" onclick="this.classList.toggle('selected')">MEMORIA</span>
-              <span class="word-chip" onclick="this.classList.toggle('selected')">RESPETO</span>
-              <span class="word-chip" onclick="this.classList.toggle('selected')">IGUALDAD</span>
-              <span class="word-chip" onclick="this.classList.toggle('selected')">VOZ</span>
+              <span class="word-chip" onclick="addNoteFromChip(this)">LIBERTAD</span>
+              <span class="word-chip" onclick="addNoteFromChip(this)">PARTICIPACIÓN</span>
+              <span class="word-chip" onclick="addNoteFromChip(this)">DERECHOS</span>
+              <span class="word-chip" onclick="addNoteFromChip(this)">MEMORIA</span>
+              <span class="word-chip" onclick="addNoteFromChip(this)">IGUALDAD</span>
+            </div>
+
+            <div class="wall-input-container">
+              <input type="text" id="wall-input-text" class="wall-input" placeholder="Escribí tu reflexión o palabra..." onkeydown="if(event.key==='Enter') addCustomNote()">
+              <button class="wall-add-btn" onclick="addCustomNote()">Pegar 📌</button>
+            </div>
+
+            <div class="memory-wall" id="memory-wall">
+              <span class="memory-note">📌 Nunca Más</span>
+              <span class="memory-note">📌 Verdad y Justicia</span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 13: SECCIÓN 11 -->
+      <!-- HOJA 13: SECCIÓN 11 (TRIVIA) -->
       <div class="my-page --right">
         <div>
           <span class="section-tag">SECCIÓN 11</span>
           <h2>¿Cuánto conoces de nuestra historia?</h2>
           <div class="divider"></div>
           <div class="content-body">
+            <div style="font-size:0.75rem; font-weight:bold; color:var(--accent); margin-bottom:8px;" id="quiz-score">Puntaje: 0 / 4 aciertos</div>
             
             <div class="quiz-item">
               <div class="quiz-question">1. ¿En qué año comenzó la Dictadura?</div>
@@ -654,7 +872,7 @@
         </div>
       </div>
 
-      <!-- PÁGINA 14: SECCIÓN 12 -->
+      <!-- HOJA 14: SECCIÓN 12 -->
       <div class="my-page --left">
         <div>
           <span class="section-tag">SECCIÓN 12</span>
@@ -662,41 +880,108 @@
           <div class="divider"></div>
           <div class="content-body">
             <p>Llegamos al final de este recorrido, pero la memoria no termina acá.</p>
-            <p>Como estudiantes y como parte de las nuevas generaciones, creemos que conocer nuestra historia también es una forma de construir nuestro presente. Las fotografías, los testimonios, los documentos y las expresiones artísticas nos permiten acercarnos a un pasado que dejó huellas profundas en nuestra sociedad.</p>
-            <p>Recordar es escuchar las voces que permanecen, reconocer las ausencias y preguntarnos qué hacemos hoy con aquello que heredamos.</p>
+            <p>Como estudiantes y como parte de las nuevas generaciones, creemos que conocer nuestra historia también es una forma de construir nuestro presente.</p>
             <p><strong>Por eso, mantener viva la memoria es una tarea colectiva. Nos pertenece a quienes nacimos después y tenemos la posibilidad de conocer, preguntar, crear y transmitir.</strong></p>
           </div>
         </div>
       </div>
 
-      <!-- PÁGINA 15: CONTRATAPA (CIERRE DEL LIBRO) -->
+      <!-- HOJA 15: PÁGINA INTERIOR DE CIERRE -->
+      <div class="my-page --right">
+        <div>
+          <span class="section-tag">FIN DEL RECORRIDO</span>
+          <h2>50 Años de Memoria</h2>
+          <div class="divider"></div>
+          <div class="content-body" style="text-align: center; margin-top: 40px;">
+            <p style="font-style: italic; font-size: 1.05rem;">"Para que el tiempo no borre los nombres ni el olvido apague las voces."</p>
+            <p style="margin-top: 30px; font-weight: bold; color: var(--accent);">Girá la hoja para cerrar el libro.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOJA 16: CONTRATAPA EXTERIOR -->
       <div class="my-page --back-cover" data-density="hard">
         <div class="back-cover-box">
-          <h2 style="color: var(--gold); font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 12px;">ARCHIVOS DE LA AUSENCIA</h2>
+          <h2 style="color: var(--gold); font-family: 'Cinzel', serif; font-size: 1.45rem; margin-bottom: 12px;">ARCHIVOS DE LA AUSENCIA</h2>
           <p style="font-family: 'Merriweather', serif; font-size: 0.85rem; color: #aaa; line-height: 1.6; margin-bottom: 20px;">
             Facultad de Artes, Diseño y Ciencias de la Cultura (FADYCC)<br>
             Universidad Nacional del Nordeste (UNNE)
           </p>
-          <div style="width: 40px; height: 2px; background: var(--accent); margin: 0 auto 20px auto;"></div>
-          <p style="font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 2px; color: var(--gold);">
+          <div style="width: 45px; height: 2px; background: var(--accent); margin: 0 auto 20px auto;"></div>
+          <p style="font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 2.5px; color: var(--gold); margin-bottom: 25px;">
             MEMORIA • VERDAD • JUSTICIA
           </p>
+          <button class="btn-reopen" id="btn-reopen">REINICIAR LECTURA ↺</button>
         </div>
       </div>
 
     </div>
   </main>
 
+  <!-- Modal para Archivos -->
+  <div class="modal-overlay" id="archive-modal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeArchiveModal()">&times;</button>
+      <h3 id="modal-title" style="color:var(--gold); font-family:'Cinzel', serif; margin-bottom:10px;"></h3>
+      <p id="modal-desc" style="font-size:0.9rem; line-height:1.6; color:#ddd;"></p>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="magazine-footer">
     <div id="page-counter">Portada</div>
   </footer>
 
-  <!-- Script Inicialización Page-Flip -->
+  <!-- Script Lógica -->
   <script>
+    let soundEnabled = true;
+    let currentScore = 0;
+    const answeredQuestions = new Set();
+    let pageFlipInstance = null;
+
+    // Sonido diferenciado de hojas vs tapa dura
+    function playPaperFlipSound(isHard = false) {
+      if (!soundEnabled) return;
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const bufferSize = audioCtx.sampleRate * (isHard ? 0.22 : 0.12);
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = Math.random() * 2 - 1;
+        }
+
+        const whiteNoise = audioCtx.createBufferSource();
+        whiteNoise.buffer = buffer;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(isHard ? 300 : 850, audioCtx.currentTime);
+        filter.Q.setValueAtTime(1.2, audioCtx.currentTime);
+
+        const gainNode = audioCtx.createGain();
+        gainNode.gain.setValueAtTime(isHard ? 0.25 : 0.12, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (isHard ? 0.22 : 0.12));
+
+        whiteNoise.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        whiteNoise.start();
+      } catch (e) {}
+    }
+
+    function turnToPage(pageNum) {
+      if (pageFlipInstance) {
+        pageFlipInstance.turnToPage(pageNum);
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
-      const pageFlip = new St.PageFlip(
-        document.getElementById('flipbook'),
+      const flipbookContainer = document.getElementById('flipbook');
+
+      pageFlipInstance = new St.PageFlip(
+        flipbookContainer,
         {
           width: 450,
           height: 600,
@@ -705,42 +990,64 @@
           maxWidth: 600,
           minHeight: 400,
           maxHeight: 700,
-          maxShadowOpacity: 0.5,
+          maxShadowOpacity: 0.6,
           showCover: true,
           mobileScrollSupport: false
         }
       );
 
-      pageFlip.loadFromHTML(document.querySelectorAll('.my-page'));
+      pageFlipInstance.loadFromHTML(document.querySelectorAll('.my-page'));
 
       const counter = document.getElementById('page-counter');
       
-      pageFlip.on('flip', (e) => {
+      pageFlipInstance.on('flip', (e) => {
         const current = e.data + 1;
+        const isHard = (current === 1 || current === 2 || current === 15 || current === 16);
+        playPaperFlipSound(isHard);
+        
         if (current === 1) {
           counter.textContent = 'Portada';
-        } else if (current === 15) {
-          counter.textContent = 'Contratapa';
+          flipbookContainer.classList.remove('book-closed-end');
+        } else if (current === 16) {
+          counter.textContent = 'Contratapa (Libro Cerrado)';
+          flipbookContainer.classList.add('book-closed-end');
         } else {
-          counter.textContent = `Página ${current - 1} de 13`;
+          counter.textContent = `Página ${current - 1} de 14`;
+          flipbookContainer.classList.remove('book-closed-end');
         }
       });
 
-      document.getElementById('btn-next').addEventListener('click', () => pageFlip.flipNext());
-      document.getElementById('btn-prev').addEventListener('click', () => pageFlip.flipPrev());
+      document.getElementById('btn-next').addEventListener('click', () => pageFlipInstance.flipNext());
+      document.getElementById('btn-prev').addEventListener('click', () => pageFlipInstance.flipPrev());
       
       const btnStart = document.getElementById('btn-start');
       if (btnStart) {
-        btnStart.addEventListener('click', () => pageFlip.flipNext());
+        btnStart.addEventListener('click', () => pageFlipInstance.flipNext());
       }
 
-      // Teclado
+      const btnReopen = document.getElementById('btn-reopen');
+      if (btnReopen) {
+        btnReopen.addEventListener('click', () => {
+          flipbookContainer.classList.remove('book-closed-end');
+          pageFlipInstance.turnToPage(0);
+        });
+      }
+
+      // Teclado (bloquea si estás escribiendo en input)
       window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') pageFlip.flipNext();
-        if (e.key === 'ArrowLeft') pageFlip.flipPrev();
+        if (e.target.tagName === 'INPUT') return;
+        if (e.key === 'ArrowRight') pageFlipInstance.flipNext();
+        if (e.key === 'ArrowLeft') pageFlipInstance.flipPrev();
       });
 
-      // Índice dinámico
+      // Toggle Sonido
+      const btnSound = document.getElementById('btn-sound');
+      btnSound.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        btnSound.textContent = soundEnabled ? '🔊 Sonido: ON' : '🔇 Sonido: OFF';
+      });
+
+      // Índice dinámico lateral
       const tocList = document.getElementById('toc-list');
       const pages = document.querySelectorAll('.my-page');
 
@@ -748,13 +1055,13 @@
         const pageNum = index + 1;
         let title = "Portada";
         if (page.classList.contains('--back-cover')) {
-          title = "Contratapa / Cierre";
+          title = "Contratapa (Libro Cerrado)";
         } else if (page.querySelector('h2')) {
           title = page.querySelector('h2').textContent;
         }
         
         const li = document.createElement('li');
-        li.innerHTML = `<a href="#" onclick="pageFlip.turnToPage(${index}); document.getElementById('toc-panel').classList.remove('active'); return false;">${pageNum === 1 ? 'Portada' : (pageNum === 15 ? 'Contratapa' : (pageNum - 1) + '. ' + title)}</a>`;
+        li.innerHTML = `<a href="#" onclick="turnToPage(${index}); document.getElementById('toc-panel').classList.remove('active'); return false;">${pageNum === 1 ? 'Portada' : (pageNum === 16 ? 'Contratapa' : (pageNum - 1) + '. ' + title)}</a>`;
         tocList.appendChild(li);
       });
 
@@ -770,15 +1077,84 @@
       });
     });
 
+    // Mapa Interactivo
+    function showMapNode(title, text) {
+      const box = document.getElementById('map-info');
+      box.style.display = 'block';
+      box.innerHTML = `<strong>${title}:</strong> ${text}`;
+    }
+
+    // Audio Player
+    let isPlayingAudio = false;
+    function toggleAudioRecord() {
+      const btn = document.getElementById('audio-toggle-btn');
+      const txt = document.getElementById('audio-status-text');
+      isPlayingAudio = !isPlayingAudio;
+      if (isPlayingAudio) {
+        btn.textContent = '⏸';
+        txt.textContent = 'Reproduciendo audio de testimonio...';
+      } else {
+        btn.textContent = '▶';
+        txt.textContent = 'Toca para reproducir testimonio en audio';
+      }
+    }
+
+    // Modal Archivos
+    function openArchiveModal(title, desc) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('archive-modal').style.display = 'flex';
+    }
+
+    function closeArchiveModal() {
+      document.getElementById('archive-modal').style.display = 'none';
+    }
+
+    // Muro Colaborativo de Notas (Sección 10 - Protegido contra cambio de página)
+    function addNoteFromChip(chip) {
+      event.stopPropagation();
+      chip.classList.toggle('selected');
+      if (chip.classList.contains('selected')) {
+        createMemoryNote(chip.textContent);
+      }
+    }
+
+    function addCustomNote() {
+      event.stopPropagation();
+      const input = document.getElementById('wall-input-text');
+      if (input.value.trim() !== '') {
+        createMemoryNote(input.value.trim());
+        input.value = '';
+      }
+    }
+
+    function createMemoryNote(text) {
+      const wall = document.getElementById('memory-wall');
+      const note = document.createElement('span');
+      note.className = 'memory-note';
+      note.textContent = '📌 ' + text;
+      wall.appendChild(note);
+    }
+
+    // Quiz con contador
     function checkAnswer(button, isCorrect) {
       const parent = button.parentElement;
+      const questionIndex = Array.from(document.querySelectorAll('.quiz-item')).indexOf(parent.parentElement);
+      
       const buttons = parent.querySelectorAll('button');
       buttons.forEach(b => b.classList.remove('correct', 'wrong'));
+      
       if (isCorrect) {
         button.classList.add('correct');
+        if (!answeredQuestions.has(questionIndex)) {
+          answeredQuestions.add(questionIndex);
+          currentScore++;
+        }
       } else {
         button.classList.add('wrong');
       }
+      
+      document.getElementById('quiz-score').textContent = `Puntaje: ${currentScore} / 4 aciertos`;
     }
   </script>
 </body>
