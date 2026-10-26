@@ -102,6 +102,58 @@
       border-color: var(--gold);
     }
 
+    /* PORTADA GENERAL PRINCIPAL (SOBRE LA REVISTA) */
+    .site-main-cover {
+      width: 100%;
+      min-height: 380px;
+      background: linear-gradient(180deg, rgba(15,15,18,0.4) 0%, rgba(15,15,18,0.95) 100%), url('img/portada-sitio.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px 30px 20px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      position: relative;
+    }
+
+    .site-main-cover-box {
+      max-width: 800px;
+      background: rgba(10, 10, 14, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 35px 40px;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    }
+
+    .site-main-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    }
+
+    .site-main-subtitle {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #eaeaea;
+      margin-bottom: 15px;
+    }
+
+    .site-main-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      letter-spacing: 2.5px;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
     /* SECCIÓN 1: REVISTA / HERO */
     .magazine-hero {
       min-height: calc(100vh - 60px);
@@ -109,7 +161,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 30px 20px;
+      padding: 40px 20px;
       position: relative;
     }
 
@@ -203,12 +255,14 @@
     .my-page.--back-cover {
       background: linear-gradient(135deg, #0a0a0d 0%, #16161c 100%);
       color: #fff;
-      padding: 0;
+      padding: 25px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       border-left: 3px solid rgba(212, 175, 55, 0.4);
       box-shadow: inset 15px 0 30px rgba(0,0,0,0.8);
+      overflow-y: auto;
     }
 
     .cover-box {
@@ -222,23 +276,56 @@
       max-width: 380px;
     }
 
-    .back-cover-box {
-      background: rgba(8, 8, 12, 0.9);
-      border: 1px solid rgba(212, 175, 55, 0.5);
-      backdrop-filter: blur(8px);
-      padding: 35px 40px;
-      border-radius: 8px;
+    /* ESTILOS DE LA CONTRAPORTADA DE LA REVISTA */
+    .back-cover-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      margin: 20px;
-      max-width: 390px;
-      opacity: 0;
-      transform: translateY(15px);
-      transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+      gap: 15px;
     }
 
-    .flipbook-container.book-closed-end .back-cover-box {
-      opacity: 1;
-      transform: translateY(0);
+    .back-cover-img {
+      max-width: 85%;
+      max-height: 220px;
+      object-fit: contain;
+      border: 2px solid var(--gold);
+      border-radius: 6px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .back-cover-credits-box {
+      background: rgba(15, 15, 20, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 6px;
+      padding: 15px 20px;
+      width: 90%;
+    }
+
+    .back-cover-credits-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 4px;
+    }
+
+    .back-cover-team-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .back-cover-team-list li {
+      font-size: 0.82rem;
+      color: #ddd;
+      letter-spacing: 0.5px;
     }
 
     .cover-title {
@@ -399,7 +486,7 @@
       margin-top: 5px;
     }
 
-    /* EQUIPO / DETRÁS DE ESCENAS */
+    /* EQUIPO / DETRÁS DE ESCENAS CON FOTOS CONSERVADAS */
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -432,7 +519,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      font-size: 2.2rem;
     }
 
     .team-name {
@@ -635,6 +722,19 @@
     </div>
   </header>
 
+ <!-- PORTADA GENERAL PRINCIPAL (SOBRE LA REVISTA) -->
+  <section class="site-main-cover">
+    <div class="site-main-cover-box">
+      <img src="img/portada.jpg" alt="Portada Archivos de la Ausencia" 
+           style="display: block; margin: 0 auto 15px auto; width: 400px; height: 500px; object-fit: contain; border-radius: 4px; border: 1px solid #d4af37; box-shadow: 0 4px 12px rgba(0,0,0,0.7);" 
+           onerror="this.style.display='none'">
+      <span class="site-main-tag">Proyecto Educativo & Audiovisual — FADYCC</span>
+      <h1 class="site-main-title">ARCHIVOS DE LA AUSENCIA</h1>
+      <p class="site-main-subtitle">A 50 años del Golpe de Estado de 1976: Memoria, Verdad y Justicia</p>
+      <p style="font-size:0.9rem; color:#bbb; line-height:1.5;">Una exploración interactiva a través del archivo, el testimonio y el arte para reflexionar sobre nuestro pasado y nuestro presente.</p>
+    </div>
+  </section>
+
   <!-- Índice Panel -->
   <nav id="toc-panel" class="toc-panel">
     <div class="toc-header">
@@ -680,7 +780,7 @@
                 <li><a href="#" onclick="turnToPage(9); return false;">50 años después: ¿qué hacemos con la memoria?</a></li>
                 <li><a href="#" onclick="turnToPage(10); return false;">¿Qué es la democracia para nosotros?</a></li>
                 <li><a href="#" onclick="turnToPage(11); return false;">¿Cuánto conoces de nuestra historia?</a></li>
-                <li><a href="#" onclick="turnToPage(12); return false;">Reflexión final: memoria, democracia y nuevas generaciones</a></li>
+                <li><a href="#" onclick="turnToPage(12); return false;">Reflexión final y Créditos</a></li>
               </ol>
             </div>
           </div>
@@ -739,7 +839,7 @@
             <h2>¿Qué fue el terrorismo de Estado?</h2>
             <div class="divider"></div>
             <div class="content-body">
-              <p>Entre 1976-1983 miles de personas fueron secuestradas en centros de detención ilegal, asesinadas, desaparecidas o torturadas de manera sistemática.</p>
+              <p>Entre 1976-1983 miles de personas fueron secuestradas en centros de detención ilegal, asesinadas, desaparecidas o torturadas de manera systematic.</p>
 
               <div class="interactive-map">
                 <span style="font-size:0.72rem; font-weight:bold; color:var(--accent);">MAPA INTERACTIVO DE SITIOS DE MEMORIA</span>
@@ -845,493 +945,343 @@
         </div>
 
         <!-- HOJA 12: SECCIÓN 10 (MURO COLABORATIVO) -->
-        <div class="my-page --left" onpointerdown="event.stopPropagation()" onmousedown="event.stopPropagation()">
+        <div class="my-page --left">
           <div>
             <span class="section-tag">SECCIÓN 10</span>
-            <h2>¿Qué es la democracia para nosotros?</h2>
+            <h2>Muro de la Memoria</h2>
             <div class="divider"></div>
             <div class="content-body">
-              <p style="font-size:0.8rem;">Elegí o sumá tus palabras para el Muro de la Memoria:</p>
-              <div class="words-grid">
-                <span class="word-chip" onclick="addNoteFromChip(this)">LIBERTAD</span>
-                <span class="word-chip" onclick="addNoteFromChip(this)">PARTICIPACIÓN</span>
-                <span class="word-chip" onclick="addNoteFromChip(this)">DERECHOS</span>
-                <span class="word-chip" onclick="addNoteFromChip(this)">MEMORIA</span>
-                <span class="word-chip" onclick="addNoteFromChip(this)">IGUALDAD</span>
-              </div>
+              <p style="font-size:0.8rem;">Deja tu mensaje o palabra sobre lo que significa la memoria para ti:</p>
 
               <div class="wall-input-container">
-                <input type="text" id="wall-input-text" class="wall-input" placeholder="Escribí tu reflexión o palabra..." onkeydown="if(event.key==='Enter') addCustomNote()">
-                <button class="wall-add-btn" onclick="addCustomNote()">Pegar 📌</button>
+                <input type="text" id="wall-input" class="wall-input" placeholder="Escribe aquí tu mensaje..." maxlength="60">
+                <button class="wall-add-btn" onclick="addMemoryNote()">Publicar</button>
               </div>
 
               <div class="memory-wall" id="memory-wall">
-                <span class="memory-note">📌 Nunca Más</span>
-                <span class="memory-note">📌 Verdad y Justicia</span>
+                <div class="memory-note">Nunca Más</div>
+                <div class="memory-note">Memoria Activa</div>
+                <div class="memory-note">Verdad y Justicia</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- HOJA 13: SECCIÓN 11 (TRIVIA) -->
+        <!-- HOJA 13: SECCIÓN 11 (CUESTIONARIO) -->
         <div class="my-page --right">
           <div>
             <span class="section-tag">SECCIÓN 11</span>
             <h2>¿Cuánto conoces de nuestra historia?</h2>
             <div class="divider"></div>
             <div class="content-body">
-              <div style="font-size:0.75rem; font-weight:bold; color:var(--accent); margin-bottom:8px;" id="quiz-score">Puntaje: 0 / 4 aciertos</div>
-              
               <div class="quiz-item">
-                <div class="quiz-question">1. ¿En qué año comenzó la Dictadura?</div>
+                <div class="quiz-question">1. ¿En qué año se produjo el Golpe de Estado?</div>
                 <div class="quiz-options">
-                  <button onclick="checkAnswer(this, false)">1970</button>
-                  <button onclick="checkAnswer(this, false)">1973</button>
-                  <button onclick="checkAnswer(this, true)">1976</button>
+                  <button onclick="checkQuiz(this, false)">1973</button>
+                  <button onclick="checkQuiz(this, true)">1976</button>
+                  <button onclick="checkQuiz(this, false)">1983</button>
                 </div>
               </div>
-
               <div class="quiz-item">
-                <div class="quiz-question">2. ¿Hasta qué año se extendió?</div>
+                <div class="quiz-question">2. ¿Qué día se conmemora el Día de la Memoria?</div>
                 <div class="quiz-options">
-                  <button onclick="checkAnswer(this, false)">1980</button>
-                  <button onclick="checkAnswer(this, true)">1983</button>
-                  <button onclick="checkAnswer(this, false)">1985</button>
+                  <button onclick="checkQuiz(this, true)">24 de Marzo</button>
+                  <button onclick="checkQuiz(this, false)">10 de Diciembre</button>
+                  <button onclick="checkQuiz(this, false)">25 de Mayo</button>
                 </div>
               </div>
-
-              <div class="quiz-item">
-                <div class="quiz-question">3. ¿Por qué es importante conservar testimonios?</div>
-                <div class="quiz-options">
-                  <button onclick="checkAnswer(this, false)">Porque son antiguos</button>
-                  <button onclick="checkAnswer(this, true)">Permiten conservar y transmitir la memoria</button>
-                </div>
-              </div>
-
-              <div class="quiz-item">
-                <div class="quiz-question">4. ¿Qué lugar ocupa el arte en la memoria?</div>
-                <div class="quiz-options">
-                  <button onclick="checkAnswer(this, false)">No tiene relación</button>
-                  <button onclick="checkAnswer(this, true)">Ayuda a recordar, expresar y cuestionar</button>
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
 
-        <!-- HOJA 14: SECCIÓN 12 -->
-        <div class="my-page --left">
-          <div>
-            <span class="section-tag">SECCIÓN 12</span>
-            <h2>Memoria, Democracia y Nuevas Generaciones</h2>
-            <div class="divider"></div>
-            <div class="content-body">
-              <p>Llegamos al final de este recorrido, pero la memoria no termina acá.</p>
-              <p>Como estudiantes y como parte de las nuevas generaciones, creemos que conocer nuestra historia también es una forma de construir nuestro presente.</p>
-              <p><strong>Por eso, mantener viva la memoria es una tarea colectiva. Nos pertenece a quienes nacimos después y tenemos la posibilidad de conocer, preguntar, crear y transmitir.</strong></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- HOJA 15: PÁGINA INTERIOR DE CIERRE -->
-        <div class="my-page --right">
-          <div>
-            <span class="section-tag">FIN DEL RECORRIDO</span>
-            <h2>50 Años de Memoria</h2>
-            <div class="divider"></div>
-            <div class="content-body" style="text-align: center; margin-top: 40px;">
-              <p style="font-style: italic; font-size: 1.05rem;">"Para que el tiempo no borre los nombres ni el olvido apague las voces."</p>
-              <p style="margin-top: 30px; font-size: 0.82rem; color: #555;">FADYCC — UNNE | 2026</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- HOJA 16: CONTRATAPA EXTERIOR -->
+        <!-- HOJA 14: CONTRAPORTADA CON CREDITOS.JPG Y LISTA EN ORDEN EXACTO -->
         <div class="my-page --back-cover" data-density="hard">
-          <div class="back-cover-box">
-            <h2 style="color: var(--gold); font-family: 'Cinzel', serif; font-size: 1.45rem; margin-bottom: 12px;">ARCHIVOS DE LA AUSENCIA</h2>
-            <p style="font-family: 'Merriweather', serif; font-size: 0.85rem; color: #aaa; line-height: 1.6; margin-bottom: 20px;">
-              Facultad de Artes, Diseño y Ciencias de la Cultura (FADYCC)<br>
-              Universidad Nacional del Nordeste (UNNE)
-            </p>
-            <div style="width: 45px; height: 2px; background: var(--accent); margin: 0 auto 20px auto;"></div>
-            <p style="font-family: 'Cinzel', serif; font-size: 0.78rem; letter-spacing: 2.5px; color: var(--gold); margin-bottom: 25px;">
-              MEMORIA • VERDAD • JUSTICIA
-            </p>
-            <button class="btn-reopen" id="btn-reopen">REINICIAR LECTURA ↺</button>
+          <div class="back-cover-container">
+            <img src="img/Creditos.jpg" alt="Créditos Archivos de la Ausencia" class="back-cover-img" onerror="this.style.display='none'">
+            <div class="back-cover-credits-box">
+              <h3 class="back-cover-credits-title">CRÉDITOS Y EQUIPO</h3>
+              <ul class="back-cover-team-list">
+                <li>1. Sabrina Navarro</li>
+                <li>2. Priscila Ayala</li>
+                <li>3. Brenda Videla</li>
+                <li>4. Mauricio Cohen</li>
+                <li>5. Santiago Vargas</li>
+                <li>6. Emilio Sánchez</li>
+              </ul>
+            </div>
+            <button class="btn-reopen" onclick="turnToPage(0)">VOLVER AL INICIO ↺</button>
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Indicador de Scroll hacia abajo -->
     <a href="#equipo" class="scroll-indicator">
-      DESCUBRÍ MÁS SOBRE EL PROYECTO
-      <span>↓</span>
+      CONOCE AL EQUIPO Y PROCESO DE TRABAJO
+      <span>▼</span>
     </a>
   </section>
 
-  <!-- SECCIÓN 2: EQUIPO Y DETRÁS DE ESCENAS -->
-  <!-- SECCIÓN: EQUIPO Y DETRÁS DE ESCENAS -->
+  <!-- SECCIÓN 2: EQUIPO DE TRABAJO (CONSERVA TUS TARJETAS Y FOTOS) -->
   <section id="equipo" class="page-section">
     <div class="section-title-wrapper">
-      <span class="section-subtitle">Nuestro Equipo</span>
-      <h2 class="section-main-title">Quiénes Hacemos Archivos de la Ausencia</h2>
+      <span class="section-subtitle">Realización Audiovisual & Web</span>
+      <h2 class="section-main-title">Equipo de Trabajo</h2>
     </div>
 
-    <!-- Texto Institucional FADYCC -->
-    <div style="max-width: 800px; margin: 0 auto 40px auto; text-align: center; color: #ddd; font-size: 0.98rem; line-height: 1.7;">
-      <p>
-        Somos alumnos de tercer año de la <strong>Tecnicatura en Diseño de Imagen, Sonido y Multimedia</strong>, de la Facultad de Artes, Diseño y Ciencias de la Cultura (FADYCC) en Resistencia, Chaco.
-      </p>
-      <p style="margin-top: 10px; color: var(--gold); font-family: 'Merriweather', serif; font-style: italic; font-size: 0.92rem;">
-        "Archivos de la Ausencia" es un proyecto anual en el que estamos trabajando con la cátedra Seminario III.
-      </p>
-    </div>
-
-    <!-- Grilla de Integrantes (3 y 3) -->
-    <div class="team-grid">
+     <div class="team-grid">
       <div class="team-card">
         <img src="img/equipo1.jpg" alt="Foto Integrante" class="team-avatar" onerror="this.outerHTML='<div class=\'team-avatar\'>👤</div>'">
-        <h3 class="team-name">Nombre Integrante</h3>
+        <h3 class="team-name">Sabrina Navarro</h3>
         <p class="team-role">Direccion / Diseño Gráfico</p>
       </div>
 
       <div class="team-card">
         <img src="img/equipo2.jpg" alt="Foto Integrante" class="team-avatar" onerror="this.outerHTML='<div class=\'team-avatar\'>👤</div>'">
-        <h3 class="team-name">Nombre Integrante</h3>
+        <h3 class="team-name">Priscila Ayala</h3>
         <p class="team-role">Producción / Realización Audiovisual</p>
       </div>
 
       <div class="team-card">
         <img src="img/equipo3.jpg" alt="Foto Integrante" class="team-avatar" onerror="this.outerHTML='<div class=\'team-avatar\'>👤</div>'">
-        <h3 class="team-name">Nombre Integrante</h3>
+        <h3 class="team-name">Brenda Videla</h3>
         <p class="team-role">Realización Audiovisual</p>
       </div>
 
       <div class="team-card">
         <img src="img/equipo4.jpg" alt="Foto Integrante" class="team-avatar" onerror="this.outerHTML='<div class=\'team-avatar\'>👤</div>'">
-        <h3 class="team-name">Nombre Integrante</h3>
+        <h3 class="team-name">Mauricio Cohen</h3>
         <p class="team-role">Arquitecto de la Información / Guión</p>
       </div>
 
       <div class="team-card">
         <img src="img/equipo5.jpg" alt="Foto Integrante" class="team-avatar" onerror="this.outerHTML='<div class=\'team-avatar\'>👤</div>'">
-        <h3 class="team-name">Nombre Integrante</h3>
+        <h3 class="team-name">Santiago Vargas</h3>
         <p class="team-role">Contenido Textual / Investigación</p>
       </div>
 
       <div class="team-card">
         <img src="img/equipo6.jpg" alt="Foto Integrante" class="team-avatar" onerror="this.outerHTML='<div class=\'team-avatar\'>👤</div>'">
-        <h3 class="team-name">Nombre Integrante</h3>
+        <h3 class="team-name">Emilio Sanchez</h3>
         <p class="team-role">Programación / Montaje</p>
       </div>
     </div>
 
-    <!-- Bloque Detrás de Escenas -->
+    <!-- Detrás de Escenas -->
     <div class="behind-scenes-box">
-      <h3 style="font-family:'Cinzel', serif; color: var(--gold); font-size: 1.3rem; text-align:center;">Detrás de Escenas (Making Of)</h3>
-      <p style="text-align:center; font-size: 0.88rem; color:#ccc; margin-top: 6px;">Un vistazo al proceso de recolección de testimonios, digitalización de material y armado de la revista.</p>
+      <h3 style="font-family:'Cinzel', serif; color:var(--gold); font-size:1.3rem; margin-bottom:10px;">Detrás de Escenas</h3>
+      <p style="font-size:0.88rem; color:#ccc;">El proceso de investigación, recopilación de archivo y montaje de Archivos de la Ausencia realizado por los alumnos del Seminario III en la FADYCC - UNNE.</p>
       
       <div class="behind-scenes-grid">
         <div class="bts-item">
-          <div class="bts-img">📷 Foto Investigación</div>
-          <div class="bts-caption">Trabajo de archivo y recopilación de documentación histórica en FADYCC.</div>
+          <img src="img/bts1.jpg" alt="Investigación de Archivo" class="bts-img" onerror="this.outerHTML='<div class=\'bts-img\'>📂 Registro de Documentos</div>'">
+          <div class="bts-caption">Revisión e investigación de documentos históricos y registros de la época.</div>
         </div>
-
         <div class="bts-item">
-          <div class="bts-img">🎙️ Foto Entrevistas</div>
-          <div class="bts-caption">Jornadas de grabación y recolección de testimonios sonoros.</div>
+          <img src="img/bts2.jpg" alt="Grabación de Testimonios" class="bts-img" onerror="this.outerHTML='<div class=\'bts-img\'>🎙️ Grabación de Entrevistas</div>'">
+          <div class="bts-caption">Entrevistas y registro sonoro de voces que mantienen viva la memoria regional.</div>
         </div>
-
         <div class="bts-item">
-          <div class="bts-img">💻 Foto Maquetación</div>
-          <div class="bts-caption">Proceso de diseño gráfico, maquetación y programación interactiva.</div>
+          <img src="img/bts3.jpg" alt="Diseño y Maquetación" class="bts-img" onerror="this.outerHTML='<div class=\'bts-img\'>💻 Desarrollo Multimedia</div>'">
+          <div class="bts-caption">Diseño interactivo y montaje de la revista digital para el Seminario III.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECCIÓN 3: REDES SOCIALES Y CONTACTO -->
+  <!-- SECCIÓN 3: REDES Y CONTACTO -->
   <section id="contacto" class="page-section">
     <div class="section-title-wrapper">
-      <span class="section-subtitle">Comunidad & Contacto</span>
-      <h2 class="section-main-title">Sumate a la Conversación</h2>
+      <span class="section-subtitle">Conéctate con Nosotros</span>
+      <h2 class="section-main-title">Redes & Contacto</h2>
     </div>
 
-    <!-- Tarjetas de Redes Sociales -->
     <div class="social-cards-grid">
       <a href="https://instagram.com" target="_blank" class="social-card">
-        <div class="social-icon">📸</div>
-        <div class="social-title">Instagram</div>
-        <div class="social-handle">@archivosdelaausencia</div>
+        <span class="social-icon">📸</span>
+        <span class="social-title">Instagram</span>
+        <span class="social-handle">@archivosdelaausencia</span>
       </a>
-
-      <a href="https://tiktok.com" target="_blank" class="social-card">
-        <div class="social-icon">🎵</div>
-        <div class="social-title">TikTok</div>
-        <div class="social-handle">@archivosdelaausencia</div>
-      </a>
-
       <a href="https://youtube.com" target="_blank" class="social-card">
-        <div class="social-icon">▶️</div>
-        <div class="social-title">YouTube</div>
-        <div class="social-handle">Archivos de la Ausencia</div>
+        <span class="social-icon">🎥</span>
+        <span class="social-title">YouTube</span>
+        <span class="social-handle">Archivos de la Ausencia - FADYCC</span>
+      </a>
+      <a href="https://spotify.com" target="_blank" class="social-card">
+        <span class="social-icon">🎧</span>
+        <span class="social-title">Podcast</span>
+        <span class="social-handle">Voces de la Memoria</span>
       </a>
     </div>
 
-    <!-- Formulario de Contacto -->
     <div class="contact-container">
-      <h3 style="font-family:'Cinzel', serif; color: var(--gold); text-align:center; margin-bottom: 20px;">Dejanos tu Mensaje</h3>
-      <form onsubmit="event.preventDefault(); alert('¡Gracias por comunicarte con nosotros!');">
+      <h3 style="font-family:'Cinzel', serif; color:var(--gold); text-align:center; margin-bottom:20px; font-size:1.2rem;">Déjanos tu Mensaje</h3>
+      <form onsubmit="handleFormSubmit(event)">
         <div class="form-group">
-          <label>Nombre completo</label>
-          <input type="text" class="form-control" placeholder="Tu nombre" required>
+          <label>Nombre y Apellido</label>
+          <input type="text" class="form-control" placeholder="Tu nombre..." required>
         </div>
         <div class="form-group">
-          <label>Correo electrónico</label>
+          <label>Correo Electrónico</label>
           <input type="email" class="form-control" placeholder="tu@email.com" required>
         </div>
         <div class="form-group">
-          <label>Mensaje o comentario</label>
-          <textarea class="form-control" rows="4" placeholder="Escribí tu mensaje acá..." required></textarea>
+          <label>Mensaje o Comentario</label>
+          <textarea class="form-control" rows="4" placeholder="Escribe tu consulta o reflexión..." required></textarea>
         </div>
-        <button type="submit" class="btn-submit">ENVIAR MENSAJE ✉️</button>
+        <button type="submit" class="btn-submit">ENVIAR MENSAJE</button>
       </form>
     </div>
   </section>
 
-  <!-- Modal para Archivos -->
-  <div class="modal-overlay" id="archive-modal">
+  <!-- Footer -->
+  <footer class="magazine-footer">
+    <p>ARCHIVOS DE LA AUSENCIA — Proyecto Académico FADYCC (UNNE)</p>
+    <p style="font-size:0.75rem; color:#777; margin-top:5px;">A 50 Años del Golpe de Estado de 1976 — Memoria, Verdad y Justicia</p>
+  </footer>
+
+  <!-- MODAL DE ARCHIVOS / DOCUMENTOS -->
+  <div id="archive-modal" class="modal-overlay">
     <div class="modal-card">
       <button class="modal-close" onclick="closeArchiveModal()">&times;</button>
-      <h3 id="modal-title" style="color:var(--gold); font-family:'Cinzel', serif; margin-bottom:10px;"></h3>
-      <p id="modal-desc" style="font-size:0.9rem; line-height:1.6; color:#ddd;"></p>
+      <h3 id="modal-title" style="font-family:'Cinzel', serif; color:var(--gold); margin-bottom:10px;"></h3>
+      <p id="modal-desc" style="font-size:0.88rem; line-height:1.6; color:#ddd;"></p>
     </div>
   </div>
 
-  <!-- Footer General -->
-  <footer class="magazine-footer">
-    <div id="page-counter" style="margin-bottom:6px;">Portada</div>
-    <div>Archivos de la Ausencia — FADYCC | UNNE 2026</div>
-  </footer>
-
-  <!-- Script Lógica -->
   <script>
-    let soundEnabled = true;
-    let currentScore = 0;
-    const answeredQuestions = new Set();
-    let pageFlipInstance = null;
+    let pageFlip = null;
 
-    function playPaperFlipSound(isHard = false) {
-      if (!soundEnabled) return;
-      try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const bufferSize = audioCtx.sampleRate * (isHard ? 0.22 : 0.12);
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const output = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          output[i] = Math.random() * 2 - 1;
-        }
-
-        const whiteNoise = audioCtx.createBufferSource();
-        whiteNoise.buffer = buffer;
-
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(isHard ? 300 : 850, audioCtx.currentTime);
-        filter.Q.setValueAtTime(1.2, audioCtx.currentTime);
-
-        const gainNode = audioCtx.createGain();
-        gainNode.gain.setValueAtTime(isHard ? 0.25 : 0.12, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + (isHard ? 0.22 : 0.12));
-
-        whiteNoise.connect(filter);
-        filter.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        whiteNoise.start();
-      } catch (e) {}
-    }
-
-    function turnToPage(pageNum) {
-      if (pageFlipInstance) {
-        pageFlipInstance.turnToPage(pageNum);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const flipbookContainer = document.getElementById('flipbook');
-
-      pageFlipInstance = new St.PageFlip(
-        flipbookContainer,
-        {
-          width: 450,
-          height: 600,
-          size: "fixed",
-          minWidth: 300,
-          maxWidth: 600,
-          minHeight: 400,
-          maxHeight: 700,
-          maxShadowOpacity: 0.6,
-          showCover: true,
-          mobileScrollSupport: false
-        }
-      );
-
-      pageFlipInstance.loadFromHTML(document.querySelectorAll('.my-page'));
-
-      const counter = document.getElementById('page-counter');
-      
-      pageFlipInstance.on('flip', (e) => {
-        const current = e.data + 1;
-        const isHard = (current === 1 || current === 2 || current === 15 || current === 16);
-        playPaperFlipSound(isHard);
-        
-        if (current === 1) {
-          counter.textContent = 'Portada';
-          flipbookContainer.classList.remove('book-closed-end');
-        } else if (current === 16) {
-          counter.textContent = 'Contratapa (Libro Cerrado)';
-          flipbookContainer.classList.add('book-closed-end');
-        } else {
-          counter.textContent = `Página ${current - 1} de 14`;
-          flipbookContainer.classList.remove('book-closed-end');
-        }
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inicializar PageFlip
+      pageFlip = new St.PageFlip(document.getElementById("flipbook"), {
+        width: 450,
+        height: 600,
+        size: "fixed",
+        minWidth: 300,
+        maxWidth: 1000,
+        minHeight: 400,
+        maxHeight: 800,
+        maxShadowOpacity: 0.8,
+        showCover: true,
+        mobileScrollSupport: false
       });
 
-      document.getElementById('btn-next').addEventListener('click', () => pageFlipInstance.flipNext());
-      document.getElementById('btn-prev').addEventListener('click', () => pageFlipInstance.flipPrev());
-      
-      const btnStart = document.getElementById('btn-start');
-      if (btnStart) {
-        btnStart.addEventListener('click', () => pageFlipInstance.flipNext());
-      }
+      pageFlip.loadFromHTML(document.querySelectorAll(".my-page"));
 
-      const btnReopen = document.getElementById('btn-reopen');
-      if (btnReopen) {
-        btnReopen.addEventListener('click', () => {
-          flipbookContainer.classList.remove('book-closed-end');
-          pageFlipInstance.turnToPage(0);
-        });
-      }
+      // Eventos de botones de navegación de la revista
+      document.getElementById("btn-prev").addEventListener("click", () => pageFlip.flipPrev());
+      document.getElementById("btn-next").addEventListener("click", () => pageFlip.flipNext());
+      document.getElementById("btn-start").addEventListener("click", () => pageFlip.flipNext());
 
-      window.addEventListener('keydown', (e) => {
-        if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
-        if (e.key === 'ArrowRight') pageFlipInstance.flipNext();
-        if (e.key === 'ArrowLeft') pageFlipInstance.flipPrev();
-      });
-
-      const btnSound = document.getElementById('btn-sound');
-      btnSound.addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        btnSound.textContent = soundEnabled ? '🔊 Sonido: ON' : '🔇 Sonido: OFF';
-      });
-
-      const tocList = document.getElementById('toc-list');
-      const pages = document.querySelectorAll('.my-page');
-
+      // Construir Índice Panel dinámico
+      const tocList = document.getElementById("toc-list");
+      const pages = document.querySelectorAll(".my-page");
       pages.forEach((page, index) => {
-        const pageNum = index + 1;
-        let title = "Portada";
-        if (page.classList.contains('--back-cover')) {
-          title = "Contratapa (Libro Cerrado)";
-        } else if (page.querySelector('h2')) {
-          title = page.querySelector('h2').textContent;
+        const titleEl = page.querySelector("h2");
+        if (titleEl) {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = "#";
+          a.textContent = `${index}. ${titleEl.textContent}`;
+          a.onclick = (e) => {
+            e.preventDefault();
+            turnToPage(index);
+            closeTOC();
+          };
+          li.appendChild(a);
+          tocList.appendChild(li);
         }
-        
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#" onclick="turnToPage(${index}); document.getElementById('toc-panel').classList.remove('active'); return false;">${pageNum === 1 ? 'Portada' : (pageNum === 16 ? 'Contratapa' : (pageNum - 1) + '. ' + title)}</a>`;
-        tocList.appendChild(li);
       });
 
-      document.getElementById('btn-toc').addEventListener('click', () => document.getElementById('toc-panel').classList.add('active'));
-      document.getElementById('btn-close-toc').addEventListener('click', () => document.getElementById('toc-panel').classList.remove('active'));
+      // Controles del Panel TOC
+      document.getElementById("btn-toc").addEventListener("click", () => {
+        document.getElementById("toc-panel").classList.toggle("active");
+      });
+      document.getElementById("btn-close-toc").addEventListener("click", closeTOC);
 
-      document.getElementById('btn-fullscreen').addEventListener('click', () => {
+      // Pantalla Completa
+      document.getElementById("btn-fullscreen").addEventListener("click", () => {
         if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen();
+          document.documentElement.requestFullscreen().catch(err => alert(err.message));
         } else {
           document.exitFullscreen();
         }
       });
     });
 
-    function showMapNode(title, text) {
-      const box = document.getElementById('map-info');
-      box.style.display = 'block';
-      box.innerHTML = `<strong>${title}:</strong> ${text}`;
+    function turnToPage(pageNum) {
+      if (pageFlip) pageFlip.turnToPage(pageNum);
     }
 
-    let isPlayingAudio = false;
-    function toggleAudioRecord() {
-      const btn = document.getElementById('audio-toggle-btn');
-      const txt = document.getElementById('audio-status-text');
-      isPlayingAudio = !isPlayingAudio;
-      if (isPlayingAudio) {
-        btn.textContent = '⏸';
-        txt.textContent = 'Reproduciendo audio de testimonio...';
-      } else {
-        btn.textContent = '▶';
-        txt.textContent = 'Toca para reproducir testimonio en audio';
-      }
+    function closeTOC() {
+      document.getElementById("toc-panel").classList.remove("active");
     }
 
+    // Mapa Interactivo
+    function showMapNode(title, info) {
+      const box = document.getElementById("map-info");
+      box.style.display = "block";
+      box.innerHTML = `<strong>${title}:</strong> ${info}`;
+    }
+
+    // Modal de Archivos
     function openArchiveModal(title, desc) {
-      document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-desc').textContent = desc;
-      document.getElementById('archive-modal').style.display = 'flex';
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-desc").textContent = desc;
+      document.getElementById("archive-modal").style.display = "flex";
     }
 
     function closeArchiveModal() {
-      document.getElementById('archive-modal').style.display = 'none';
+      document.getElementById("archive-modal").style.display = "none";
     }
 
-    function addNoteFromChip(chip) {
-      event.stopPropagation();
-      chip.classList.toggle('selected');
-      if (chip.classList.contains('selected')) {
-        createMemoryNote(chip.textContent);
+    // Muro de la memoria
+    function addMemoryNote() {
+      const input = document.getElementById("wall-input");
+      const text = input.value.trim();
+      if (text) {
+        const wall = document.getElementById("memory-wall");
+        const note = document.createElement("div");
+        note.className = "memory-note";
+        note.textContent = text;
+        wall.insertBefore(note, wall.firstChild);
+        input.value = "";
       }
     }
 
-    function addCustomNote() {
-      event.stopPropagation();
-      const input = document.getElementById('wall-input-text');
-      if (input.value.trim() !== '') {
-        createMemoryNote(input.value.trim());
-        input.value = '';
-      }
-    }
-
-    function createMemoryNote(text) {
-      const wall = document.getElementById('memory-wall');
-      const note = document.createElement('span');
-      note.className = 'memory-note';
-      note.textContent = '📌 ' + text;
-      wall.appendChild(note);
-    }
-
-    function checkAnswer(button, isCorrect) {
-      const parent = button.parentElement;
-      const questionIndex = Array.from(document.querySelectorAll('.quiz-item')).indexOf(parent.parentElement);
-      
-      const buttons = parent.querySelectorAll('button');
-      buttons.forEach(b => b.classList.remove('correct', 'wrong'));
-      
+    // Cuestionario
+    function checkQuiz(btn, isCorrect) {
+      const parent = btn.parentElement;
+      const buttons = parent.querySelectorAll("button");
+      buttons.forEach(b => b.disabled = true);
       if (isCorrect) {
-        button.classList.add('correct');
-        if (!answeredQuestions.has(questionIndex)) {
-          answeredQuestions.add(questionIndex);
-          currentScore++;
-        }
+        btn.classList.add("correct");
       } else {
-        button.classList.add('wrong');
+        btn.classList.add("wrong");
       }
-      
-      document.getElementById('quiz-score').textContent = `Puntaje: ${currentScore} / 4 aciertos`;
+    }
+
+    // Toggle de Audio
+    let isPlayingAudio = false;
+    function toggleAudioRecord() {
+      const btn = document.getElementById("audio-toggle-btn");
+      const status = document.getElementById("audio-status-text");
+      isPlayingAudio = !isPlayingAudio;
+      if (isPlayingAudio) {
+        btn.textContent = "⏸";
+        status.textContent = "Reproduciendo testimonio de audio...";
+      } else {
+        btn.textContent = "▶";
+        status.textContent = "Toca para reproducir testimonio en audio";
+      }
+    }
+
+    // Formulario de contacto
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert("¡Gracias por tu mensaje! Ha sido recibido correctamente.");
+      e.target.reset();
     }
   </script>
 </body>
